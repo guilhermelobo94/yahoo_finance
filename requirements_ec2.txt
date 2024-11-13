@@ -1,0 +1,7 @@
+fastapi==0.115.5
+uvicorn==0.32.0
+yfinance==0.2.49
+tensorflow-cpu==2.18.0
+scikit-learn==1.5.2
+pandas==2.2.3
+numpy==1.23.5
