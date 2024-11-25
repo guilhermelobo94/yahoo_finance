@@ -7,6 +7,8 @@ from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
 import logging
 from typing import Optional
+import time  # Adicionado para medir tempo de execução
+import psutil  # Adicionado para monitorar recursos
 
 app = FastAPI()
 
@@ -54,6 +56,8 @@ async def prever_acao(request: PrevisaoRequest):
     if modelo is None:
         raise HTTPException(status_code=500, detail="Modelo não está disponível.")
 
+    inicio_tempo = time.time()  # Registrar o início do tempo de execução
+
     try:
         historico = consultar_acao(request.ativo)
 
@@ -83,11 +87,20 @@ async def prever_acao(request: PrevisaoRequest):
                 datas_futuras.append(proxima_data)
             dias_adicionados += 1
 
+        tempo_execucao = time.time() - inicio_tempo  # Calcular o tempo de execução
+        uso_cpu = psutil.cpu_percent(interval=None)  # Monitorar uso de CPU
+        uso_memoria = psutil.virtual_memory().percent  # Monitorar uso de memória
+
         resultado = {
             "previsoes": [
                 {"data": str(data.date()), "preco_previsto": float(previsao[0])}
                 for data, previsao in zip(datas_futuras, previsoes)
-            ]
+            ],
+            "monitoramento": {  # Adicionar informações de monitoramento ao JSON
+                "tempo_execucao_segundos": tempo_execucao,
+                "uso_cpu_percentual": uso_cpu,
+                "uso_memoria_percentual": uso_memoria
+            }
         }
 
         logger.info(f"Previsão realizada com sucesso para o ativo {request.ativo}.")
