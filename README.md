@@ -37,11 +37,11 @@ Trabalho do quarto módulo da pós graduação de machine learning
 > icacls "C:\.projetos\yahoo_finance\chave2.pem" /grant:r "mathe:R"
 
 #### Subir arquivos:
-> scp -i "C:\.projetos\yahoo_finance\chave2.pem" C:\.projetos\yahoo_finance\requirements_ec2.txt ec2-user@54.236.103.139:~/
+> scp -i "C:\.projetos\yahoo_finance\chave2.pem" "C:\.projetos\yahoo_finance\requirements_ec2.txt" ec2-user@54.236.103.139:~/
 > 
-> scp -i "C:\.projetos\yahoo_finance\chave2.pem" C:\.projetos\yahoo_finance\api.py ec2-user@54.236.103.139:~/ 
+> scp -i "C:\.projetos\yahoo_finance\chave2.pem" "C:\.projetos\yahoo_finance\api.py" ec2-user@54.236.103.139:~/ 
 > 
-> scp -i "C:\.projetos\yahoo_finance\chave2.pem" C:\.projetos\yahoo_finance\best_model.h5 ec2-user@54.236.103.139:~/
+> scp -i "C:\.projetos\yahoo_finance\chave2.pem" "C:\.projetos\yahoo_finance\best_model.h5" ec2-user@54.236.103.139:~/
 
 #### Dependencias e execução: 
 
